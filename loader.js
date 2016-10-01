@@ -107,10 +107,10 @@ var loader = (function() {
   
   function getResponse(json) {
     var response = [];
-    var s = json.sections;
+    var sections = json.sections;
     
-    for (var i = 0; i < s.length; i++) {
-      var section = s[i];
+    for (var i = 0; i < sections.length; i++) {
+      var section = sections[i];
       switch (section.type) {
         case Types.NUMBER:
           response.push(section.answerId ? getElemById(section.answerId).value : null);
@@ -119,14 +119,14 @@ var loader = (function() {
           var checkedBoxes = {};
           response.push(checkedBoxes);
           
-          var answers = s.answers;
+          var answers = section.answers;
           for (var j = 0; j < answers.length; j++) {
             var answer = answers[j];
             checkedBoxes[answer.attributes.value || answer.value] = getElemById(answer.attributes.id).checked;
           }
           break;
         case Types.RADIO:
-          var answers = s.answers;
+          var answers = section.answers;
           var selected = null;
           for (var i = 0; i < answers.length; i++) {
             var answer = answers[i];
@@ -138,7 +138,7 @@ var loader = (function() {
           response.push(selected);
           break;
         case Types.TEXT:
-          reponse.push(getElemById(answer.id || answer.attributes.id));
+          response.push(getElemById(answer.id || answer.attributes.id));
           break;
       }
     }
