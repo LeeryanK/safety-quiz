@@ -62,7 +62,7 @@ var loader = (function() {
       case Types.NUMBER:
         var a = addNewEl('input', renderContainer);
         a.type = 'number';
-        a.id = section.answerId;
+        a.id = section.answerId || section.id || section.attributes.id;
         addNewEl('br', renderContainer);
         break;
       case Types.CHECKBOX:
@@ -73,6 +73,8 @@ var loader = (function() {
           a.type = 'checkbox';
           for (var j in answer.attributes)
             a[j] = answer.attributes[j];
+          a.id = answer.id || answer.answerId || a.id;
+          a.value = answer.value || a.value;
           
           var t = addNewEl('span', renderContainer);
           t.innerHTML = answer.text;
@@ -88,6 +90,8 @@ var loader = (function() {
           a.type = 'radio';
           for (var j in answer.attributes)
             a[j] = answer.attributes[j];
+          a.id = answer.id || answer.attributes.id || a.id;
+          a.value = answer.value || answer.attributes.value || a.value;
           
           var t = addNewEl('span', renderContainer);
           t.innerHTML = answer.text;
@@ -98,7 +102,7 @@ var loader = (function() {
       case Types.TEXT:
         var a = addNewEl('input', renderContainer);
         a.type = 'text';
-        a.id = section.answerId;
+        a.id = section.answerId || a.id || a.attributes.id;
         
         addNewEl('br', renderContainer);
         break;
