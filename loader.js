@@ -11,7 +11,7 @@ var loader = (function() {
     return document.getElementById(id);
   }
   function safeguard() {
-    return document.getElementsByTagName('base')[0].href === '/safety-quiz/';
+    return document.getElementsByTagName('base')[0].href === 'https://leeryank.github.io/safety-quiz/';
   }
   
   function requestJSON(url, callback) {
