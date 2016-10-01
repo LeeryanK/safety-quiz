@@ -2,7 +2,8 @@
   "sections": [
     {
       "question": "How old are you?",
-      "type": "number"
+      "type": "number",
+      "id": "age"
     },
     {
       "question": "What's your favorite food?",
@@ -10,15 +11,21 @@
       "answers": [
         {
           "attributes": {"name": "fav-food", "value": "pizza"},
-          "text": "Pizza"
+          "text": "Pizza",
+          "id": "pizza",
+          "value": "pizza"
         },
         {
           "attributes": {"name": "fav-food", "value": "burgers"},
-          "text": "Burgers"
+          "text": "Burgers",
+          "id": "burgers",
+          "value": "burgers"
         },
         {
           "attributes": {"name": "fav-food", "value": "sushi"},
-          "text": "Sushi"
+          "text": "Sushi",
+          "id": "sushi",
+          "value": "sushi"
         }
       ]
     },
@@ -28,23 +35,33 @@
       "answers": [
         {
           "attributes": {"name": "fav-game", "value": "vd"},
-          "text": "Village Development"
+          "text": "Village Development",
+          "id": "vd",
+          "value": "vd"
         },
         {
           "attributes": {"name": "fav-game", "value": "tg"},
           "text": "Tower Games"
+          "id": "tg",
+          "value": "tg"
         },
         {
           "attributes": {"name": "fav-game", "value": "svg"},
-          "text": "Sport Video Games"
+          "text": "Sport Video Games",
+          "id": "svg",
+          "value": "svg"
         },
         {
           "attributes": {"name": "fav-food-xb", "value": "fps"},
-          "text": "First Person Shooter"
+          "text": "First Person Shooter",
+          "id": "fps",
+          "value" "fps"
         },
         {
           "attributes": {"name": "fav-game", "value": "ps"},
-          "text": "Physical Sports"
+          "text": "Physical Sports",
+          "id": "ps",
+          "value": "ps"
         },
         {
           "attributes": {"name": "fav-game", "value": "p"},
@@ -70,11 +87,15 @@
       "answers": [
         {
           "attributes": {"name": "build-xb", "value": "apps"},
-          "text": "Apps"
+          "text": "Apps",
+          "id": "apps",
+          "value": "apps"
         },
         {
           "attributes": {"name": "build-xb", "value": "websites"},
-          "text": "Websites"
+          "text": "Websites",
+          "id": "web",
+          "value": "web"
         }
       ]
     }
