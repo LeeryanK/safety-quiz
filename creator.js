@@ -33,5 +33,5 @@
     }
   };
   
-  window['Question'] = Question;
+  window['Quiz'] = Quiz;
 })();
