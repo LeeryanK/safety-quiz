@@ -33,24 +33,25 @@ var loader = (function() {
   }
   
   function renderFromURL(url, renderContainer, onsubmit) {
+    var elemCollection = [];
     if (!safeguard())
       throw new Error('Your project has been disabled.');
     requestJSON(url, function(j) {
       console.log('Creating form...');
       var sections = j.sections;
       for (var i = 0; i < sections.length; i++) {
-        renderSection(sections[i], renderContainer);
+        renderSection(sections[i], renderContainer, elemCollection);
       }
       
       var b = addNewEl('button', renderContainer);
       b.addEventListener('click', function() {
-        onsubmit(getResponse(j));
+        onsubmit(getResponse(elemCollection));
       });
       b.innerHTML = j.submitButtonText;
     });
   }
   
-  function renderSection(section, renderContainer) {
+  function renderSection(section, renderContainer, elemCollection) {
     var question = section.question;
     var type = section.type;
     
@@ -61,20 +62,21 @@ var loader = (function() {
     switch (type) {
       case Types.NUMBER:
         var a = addNewEl('input', renderContainer);
+        elemCollection.push(a);
         a.type = 'number';
-        a.id = section.answerId || section.id || section.attributes.id;
         addNewEl('br', renderContainer);
         break;
       case Types.CHECKBOX:
+        var checkBoxes = [];
+        elemCollection.push(checkBoxes);
         var answers = section.answers;
         for (var i = 0; i < answers.length; i++) {
           var answer = answers[i];
           var a = addNewEl('input', renderContainer);
           a.type = 'checkbox';
-          for (var j in answer.attributes)
-            a[j] = answer.attributes[j];
-          a.id = answer.id || answer.answerId || a.id;
-          a.value = answer.value || a.value;
+          a.name = answer.name;
+          a.value = answer.value;
+          checkBoxes.push(a);
           
           var t = addNewEl('span', renderContainer);
           t.innerHTML = answer.text;
@@ -83,15 +85,17 @@ var loader = (function() {
         }
         break;
       case Types.RADIO:
+        var radios = [];
+        elemCollection.push(radios);
         var answers = section.answers;
         for (var i = 0; i < answers.length; i++) {
           var answer = answers[i];
           var a = addNewEl('input', renderContainer);
           a.type = 'radio';
-          for (var j in answer.attributes)
-            a[j] = answer.attributes[j];
-          a.id = answer.id || answer.attributes.id || a.id;
-          a.value = answer.value || answer.attributes.value || a.value;
+          radios.push(a);
+          
+          a.name = answer.name;
+          a.value = answer.value;
           
           var t = addNewEl('span', renderContainer);
           t.innerHTML = answer.text;
@@ -102,51 +106,28 @@ var loader = (function() {
       case Types.TEXT:
         var a = addNewEl('input', renderContainer);
         a.type = 'text';
-        a.id = section.answerId || a.id || a.attributes.id;
+        elemCollection.push(a);
         
         addNewEl('br', renderContainer);
         break;
     }
   }
   
-  function getResponse(json) {
+  function getResponse(elemColl) {
     var response = [];
-    var sections = json.sections;
-    
-    for (var i = 0; i < sections.length; i++) {
-      var section = sections[i];
-      switch (section.type) {
-        case Types.NUMBER:
-          response.push(getElemById(section.answerId || section.id || section.attributes.id).value);
-          break;
-        case Types.CHECKBOX:
-          var checkedBoxes = {};
-          response.push(checkedBoxes);
-          
-          var answers = section.answers;
-          for (var j = 0; j < answers.length; j++) {
-            var answer = answers[j];
-            checkedBoxes[answer.attributes.value || answer.value] = getElemById(answer.attributes.id).checked;
-          }
-          break;
-        case Types.RADIO:
-          var answers = section.answers;
-          var selected = null;
-          for (var i = 0; i < answers.length; i++) {
-            var answer = answers[i];
-            if (getElemById(answer.attributes.id).checked) {
-              var selected = answer.value || answer.attributes.value;
-              break;
-            }
-          }
-          response.push(selected);
-          break;
-        case Types.TEXT:
-          response.push(getElemById(answer.id));
-          break;
+    for (var i = 0; i < elemColl.length; i++) {
+      var elem = elemColl[i];
+      if (elem instanceof Element) {
+        response.push(elem.value);
+      } else if (elem instanceof Array) {
+        var elems = {};
+        response.push(elems);
+        for (var j = 0; j < elem.length; j++) {
+          var checkOrRadio = elem[j];
+          elems[checkOrRadio.value] = checkOrRadio.checked;
+        }
       }
     }
-    
     return response;
   }
   
