@@ -40,7 +40,10 @@ var loader = (function() {
       }
       
       var b = addNewEl('button', renderContainer);
-      b.addEventListener('click', onsubmit);
+      b.addEventListener('click', function() {
+        onsubmit(getResponse(j));
+      });
+      b.innerHTML = j.submitButtonText;
     });
   }
   
@@ -97,6 +100,47 @@ var loader = (function() {
         addNewEl('br', renderContainer);
         break;
     }
+  }
+  
+  function getResponse(json) {
+    var response = [];
+    var s = json.sections;
+    
+    for (var i = 0; i < s.length; i++) {
+      var section = s[i];
+      switch (section.type) {
+        case Types.NUMBER:
+          response.push(section.answerId ? getElemById(section.answerId).value : null);
+          break;
+        case Types.CHECKBOX:
+          var checkedBoxes = {};
+          response.push(checkedBoxes);
+          
+          var answers = s.answers;
+          for (var j = 0; j < answers.length; j++) {
+            var answer = answers[j];
+            checkedBoxes[answer.attributes.value || answer.value] = getElemById(answer.attributes.id).checked;
+          }
+          break;
+        case Types.RADIO:
+          var answers = s.answers;
+          var selected = null;
+          for (var i = 0; i < answers.length; i++) {
+            var answer = answers[i];
+            if (getElemById(answer.attributes.id).checked) {
+              var selected = answer.value || answer.attributes.value;
+              break;
+            }
+          }
+          response.push(selected);
+          break;
+        case Types.TEXT:
+          var reponse.push(getElemById(answer.id || answer.attributes.id));
+          break;
+      }
+    }
+    
+    return response;
   }
   
   return {
