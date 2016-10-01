@@ -10,14 +10,21 @@
     return JSON.stringify(this);
   };
   
-  Quiz.prototype.addQuestion = function(question, type) {
-    this.current_ = new Question(question, type);
+  Quiz.prototype.addQuestion = function(question, type, name) {
+    this.current_ = new Question(question, type, name);
     this.sections.push(this.current_);
   };
   
   Quiz.prototype.addAnswer = function(text, value) {
     if (this.current_ instanceof Question)
       this.current_.addAnswer(text, value);
+  };
+  
+  var Types = {
+    NUMBER: 'number',
+    TEXT: 'text',
+    CHECKBOX: 'checkbox',
+    RADIO: 'radio'
   };
   
   function Question(question, type, name) {
