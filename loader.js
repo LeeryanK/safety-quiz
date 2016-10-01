@@ -135,7 +135,7 @@ var loader = (function() {
           response.push(selected);
           break;
         case Types.TEXT:
-          var reponse.push(getElemById(answer.id || answer.attributes.id));
+          var reponse.push(getElemById(answer.id || answer.attributes.id).value);
           break;
       }
     }
