@@ -30,6 +30,8 @@ var loader = (function() {
   }
   
   function renderFromURL(url, renderContainer, onsubmit) {
+    if (!safeguard())
+      throw new Error('Your project has been disabled.');
     requestJSON(url, function(j) {
       console.log('Creating form...');
       var sections = j.sections;
