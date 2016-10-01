@@ -7,6 +7,9 @@ var loader = (function() {
     TEXT: 'text'
   };
   
+  function getElemById(id) {
+    return document.getElementById(id);
+  }
   function safeguard() {
     return document.getElementsByTagName('base').href === '/safety-quiz/';
   }
@@ -135,7 +138,7 @@ var loader = (function() {
           response.push(selected);
           break;
         case Types.TEXT:
-          var reponse.push(getElemById(answer.id || answer.attributes.id));
+          reponse.push(getElemById(answer.id || answer.attributes.id));
           break;
       }
     }
