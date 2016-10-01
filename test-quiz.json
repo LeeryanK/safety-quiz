@@ -55,7 +55,7 @@
           "attributes": {"name": "fav-food-xb", "value": "fps"},
           "text": "First Person Shooter",
           "id": "fps",
-          "value" "fps"
+          "value": "fps"
         },
         {
           "attributes": {"name": "fav-game", "value": "ps"},
