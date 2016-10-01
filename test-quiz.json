@@ -1,0 +1,84 @@
+
+{
+  "sections": [
+    {
+      "question": "How old are you?",
+      "type": "number"
+    },
+    {
+      "question": "What's your favorite food?",
+      "type": "radio",
+      "answers": [
+        {
+          "attributes": {"name": "fav-food", "value": "pizza"},
+          "text": "Pizza"
+        },
+        {
+          "attributes": {"name": "fav-food", "value": "burgers"},
+          "text": "Burgers"
+        },
+        {
+          "attributes": {"name": "fav-food", "value": "sushi"},
+          "text": "Sushi"
+        }
+      ]
+    },
+    {
+      "question": "What type of games do you play?",
+      "type": "checkbox",
+      "answers": [
+        {
+          "attributes": {"name": "fav-game", "value": "vd"},
+          "text": "Village Development"
+        },
+        {
+          "attributes": {"name": "fav-game", "value": "tg"},
+          "text": "Tower Games"
+        },
+        {
+          "attributes": {"name": "fav-game", "value": "svg"},
+          "text": "Sport Video Games"
+        },
+        {
+          "attributes": {"name": "fav-food-xb", "value": "fps"},
+          "text": "First Person Shooter"
+        },
+        {
+          "attributes": {"name": "fav-game", "value": "ps"},
+          "text": "Physical Sports"
+        },
+        {
+          "attributes": {"name": "fav-game", "value": "p"},
+          "text": "Platformers"
+        },
+        {
+          "attributes": {"name": "fav-game", "value": "l/p"},
+          "text": "Logic/Puzzles"
+        },
+        {
+          "attributes": {"name": "fav-game", "value": "bg"},
+          "text": "Board Games"
+        },
+        {
+          "attributes": {"name": "fav-game", "value": "any"},
+          "text": "Anything that helps me relax"
+        }
+      ]
+    },
+    {
+      "question": "Do you want to build apps or websites (or both)?",
+      "type": "checkbox",
+      "answers": [
+        {
+          "attributes": {"name": "build-xb", "value": "apps"},
+          "text": "Apps"
+        },
+        {
+          "attributes": {"name": "build-xb", "value": "websites"},
+          "text": "Websites"
+        }
+      ]
+    }
+  ],
+  "submitButtonText": "Submit"
+}
