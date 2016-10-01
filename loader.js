@@ -113,7 +113,7 @@ var loader = (function() {
       var section = sections[i];
       switch (section.type) {
         case Types.NUMBER:
-          response.push(document.getElement(section.answerId || section.id || section.attributes.id).value);
+          response.push(getElemById(section.answerId || section.id || section.attributes.id).value);
           break;
         case Types.CHECKBOX:
           var checkedBoxes = {};
