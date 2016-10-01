@@ -142,7 +142,7 @@ var loader = (function() {
           response.push(selected);
           break;
         case Types.TEXT:
-          response.push(getElemById(answer.id || answer.attributes.id));
+          response.push(getElemById(answer.id));
           break;
       }
     }
