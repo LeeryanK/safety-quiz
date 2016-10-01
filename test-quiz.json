@@ -41,7 +41,7 @@
         },
         {
           "attributes": {"name": "fav-game", "value": "tg"},
-          "text": "Tower Games"
+          "text": "Tower Games",
           "id": "tg",
           "value": "tg"
         },
